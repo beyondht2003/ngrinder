@@ -311,7 +311,6 @@ public class User extends BaseModel<User> {
 	}
 
 	public void setOwners(List<User> owners) {
-		System.out.println("owner");
 		this.owners = owners;
 	}
 
