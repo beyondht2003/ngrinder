@@ -1,4 +1,4 @@
-/* 
+/*
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -9,7 +9,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
 package org.ngrinder.user.controller;
 
@@ -83,7 +83,7 @@ public class UserController extends BaseController {
 	@RequestMapping({"", "/"})
 	public String getAll(ModelMap model, @RequestParam(required = false) Role role,
 						 @PageableDefault(page = 0, size = 10) Pageable pageable,
-	                     @RequestParam(required = false) String keywords) {
+						 @RequestParam(required = false) String keywords) {
 		pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(), defaultIfNull(pageable.getSort(), DEFAULT_SORT));
 		Pageable defaultPageable = new PageRequest(0, pageable.getPageSize(), defaultIfNull(pageable.getSort(), DEFAULT_SORT));
 		Page<User> pagedUser;
@@ -191,7 +191,7 @@ public class UserController extends BaseController {
 
 			// prevent user to modify with other user id
 			checkArgument(updatedUserInDb.getId().equals(updatedUser.getId()), "Illegal request to update user:%s",
-					updatedUser);
+				updatedUser);
 		}
 		save(updatedUser);
 		model.clear();
@@ -241,7 +241,7 @@ public class UserController extends BaseController {
 	@RestAPI
 	@RequestMapping("/api/switch_options")
 	public HttpEntity<String> switchOptions(User user,
-	                                        @RequestParam(required = true) final String keywords) {
+											@RequestParam(required = true) final String keywords) {
 		return toJsonHttpEntity(getSwitchableUsers(user, keywords));
 	}
 
@@ -254,25 +254,23 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/switch_options")
 	public String switchOptions(User user,
-	                            ModelMap model) {
+								ModelMap model) {
 		model.addAttribute("switchableUsers", getSwitchableUsers(user, ""));
 		return "user/switch_options";
 	}
 
 
 	private List<UserSearchResult> getSwitchableUsers(User user, String keywords) {
-		List<UserSearchResult> result = newArrayList();
 		if (user.getRole().hasPermission(Permission.SWITCH_TO_ANYONE)) {
+			List<UserSearchResult> result = newArrayList();
 			for (User each : userService.getPagedAll(keywords, new PageRequest(0, 10))) {
 				result.add(new UserSearchResult(each));
 			}
+			return result;
 		} else {
-			User currUser = userService.getOne(user.getUserId());
-			for (User each : currUser.getOwners()) {
-				result.add(new UserSearchResult(each));
-			}
+			return userService.getSharedUser(user);
 		}
-		return result;
+
 	}
 
 
@@ -286,7 +284,7 @@ public class UserController extends BaseController {
 	 */
 	@RequestMapping("/switch")
 	public String switchUser(@RequestParam(required = false, defaultValue = "") String to,
-	                         HttpServletRequest request, HttpServletResponse response, ModelMap model) {
+							 HttpServletRequest request, HttpServletResponse response, ModelMap model) {
 		Cookie cookie = new Cookie("switchUser", to);
 		cookie.setPath("/");
 		// Delete Cookie if empty switchUser
@@ -413,10 +411,10 @@ public class UserController extends BaseController {
 	@RestAPI
 	@RequestMapping(value = "/api/search", method = RequestMethod.GET)
 	public HttpEntity<String> search(User user, @PageableDefault Pageable pageable,
-	                                 @RequestParam(required = true) String keywords) {
+									 @RequestParam(required = true) String keywords) {
 		pageable = new PageRequest(pageable.getPageNumber(), pageable.getPageSize(),
-				defaultIfNull(pageable.getSort(),
-						new Sort(Direction.ASC, "userName")));
+			defaultIfNull(pageable.getSort(),
+				new Sort(Direction.ASC, "userName")));
 		Page<User> pagedUser = userService.getPagedAll(keywords, pageable);
 		List<UserSearchResult> result = newArrayList();
 		for (User each : pagedUser) {
