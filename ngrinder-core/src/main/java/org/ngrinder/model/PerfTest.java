@@ -1,4 +1,4 @@
-/* 
+/*
  * Licensed under the Apache License, Version 2.0 (the "License");
  *  you may not use this file except in compliance with the License.
  *  You may obtain a copy of the License at
@@ -9,7 +9,7 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
 package org.ngrinder.model;
 
@@ -313,6 +313,44 @@ public class PerfTest extends BaseModel<PerfTest> {
 	@Cloneable
 	@Column(name = "param")
 	private String param;
+
+
+	/**
+	 * 新增字段，TPS标准差，TPS波动率，最小/大RT，RT 25/50/75/80/85/90/95/99百分位数
+	 *
+	 */
+
+	@Expose
+	@Column(name = "minRT")
+	private Double minRT;
+
+	@Expose
+	@Column(name = "pct25RT")
+	private Double pct25RT;
+
+	@Expose
+	@Column(name = "pct50RT")
+	private Double pct50RT;
+
+	@Expose
+	@Column(name = "pct75RT")
+	private Double pct75RT;
+
+	@Expose
+	@Column(name = "pct90RT")
+	private Double pct90RT;
+
+	@Expose
+	@Column(name = "pct95RT")
+	private Double pct95RT;
+
+	@Expose
+	@Column(name = "pct99RT")
+	private Double pct99RT;
+
+	@Expose
+	@Column(name = "maxRT")
+	private Double maxRT;
 
 	@PrePersist
 	@PreUpdate
@@ -847,6 +885,70 @@ public class PerfTest extends BaseModel<PerfTest> {
 
 	public void setParam(String param) {
 		this.param = param;
+	}
+
+	public Double getMinRT() {
+		return minRT;
+	}
+
+	public void setMinRT(Double minRT) {
+		this.minRT = minRT;
+	}
+
+	public Double getPct25RT() {
+		return pct25RT;
+	}
+
+	public void setPct25RT(Double pct25RT) {
+		this.pct25RT = pct25RT;
+	}
+
+	public Double getPct50RT() {
+		return pct50RT;
+	}
+
+	public void setPct50RT(Double pct50RT) {
+		this.pct50RT = pct50RT;
+	}
+
+	public Double getPct75RT() {
+		return pct75RT;
+	}
+
+	public void setPct75RT(Double pct75RT) {
+		this.pct75RT = pct75RT;
+	}
+
+	public Double getPct90RT() {
+		return pct90RT;
+	}
+
+	public void setPct90RT(Double pct90RT) {
+		this.pct90RT = pct90RT;
+	}
+
+	public Double getPct95RT() {
+		return pct95RT;
+	}
+
+	public void setPct95RT(Double pct95RT) {
+		this.pct95RT = pct95RT;
+	}
+
+	public Double getPct99RT() {
+		return pct99RT;
+	}
+
+	public void setPct99RT(Double pct99RT) {
+		this.pct99RT = pct99RT;
+	}
+
+	public Double getMaxRT() {
+		return maxRT;
+	}
+
+	public void setMaxRT(Double maxRT) {
+		this.maxRT = maxRT;
 	}
 
 	public void prepare(boolean isClone) {

@@ -41,6 +41,7 @@ class Login {
  
     @BeforeThread
     public void beforeThread() {
+        LoggerFactory.getLogger("worker").setLevel(Level.ERROR)
         grinder.statistics.delayReports=true;
          
         // reset to the all cookies
@@ -68,6 +69,8 @@ class Login {
  
     @Test
     public void test(){
+        grinder.logger.info("process number, thread number, run number, {}, {}, {}",
+                grinder.processNumber, grinder.threadNumber, grinder.runNumber)
         HTTPResponse result = request.GET("http://my.site.com")
  
         if (result.statusCode == 301 || result.statusCode == 302) {

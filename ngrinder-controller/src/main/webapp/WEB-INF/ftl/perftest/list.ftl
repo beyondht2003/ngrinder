@@ -442,7 +442,7 @@ $(document).ready(function () {
 		}
 		document.forms.test_list_form.submit();
 	});
-	
+
 	$("#introButton").click(function() {
 		introJs().start();
 	});

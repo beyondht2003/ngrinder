@@ -36,12 +36,12 @@
 								</td>
 								<td>
 								<#if svnUrl?has_content>
-									<div class="input-prepend pull-right" rel="popover" 
+									<div class="input-prepend pull-right" rel="popover"
 										title="Subversion" data-placement="bottom"
 										data-content='<@spring.message "script.message.svn"/>'
 										data-html="true">
 										<span class="add-on" style="cursor:default">SVN</span><span class="input-xlarge uneditable-input span7" style="cursor:text">${svnUrl}</span>
-						        	</div>  
+						        	</div>
 					        	</#if>
 				        		</td>
 				        	</tr>
@@ -77,25 +77,25 @@
 										<i class="icon-remove icon-white"></i>
 										<@spring.message "script.action.delete"/>
 									</a>
-								</td> 
+								</td>
 							</tr>
 						</table>
 					</td>
 				</tr>
-			</table>	
+			</table>
 		</div>
-		
+
 		<table class="table table-striped table-bordered ellipsis" id="script_list_table" style="width:940px">
 			<colgroup>
 				<col width="30">
 				<col width="32">
-				<col width="230"> 
+				<col width="230">
 				<col>
 				<col width="150">
 				<col width="80">
 				<col width="80">
 				<col width="80">
-			</colgroup> 
+			</colgroup>
 			<thead>
 				<tr>
 					<th><input type="checkbox" class="checkbox" value=""></th>
@@ -184,13 +184,13 @@
 					}
 				});
 			});
-			
+
 			$("#search_btn").on('click', function() {
 				searchScriptList();
 			});
 
 			enableCheckboxSelectAll("script_list_table");
-			
+
 			$("i.script-download").on('click', function() {
 				window.location  = "${req.getContextPath()}/script/download/" + $(this).attr("spath");
 			});
@@ -201,7 +201,7 @@
 					"bFilter": false,
 					"bLengthChange": false,
 					"bInfo": false,
-					"iDisplayLength": 10, 
+					"iDisplayLength": 20,
 					"aaSorting": [],
 					"aoColumns": [{"asSorting": []}, {"asSorting": []}, null, {"asSorting": []}, null, null, null, {"asSorting": []}],
 					"sPaginationType": "bootstrap",
@@ -215,7 +215,7 @@
 				$(".no-click").off('click');
 			</#if>
 		});
-		
+
 		function searchScriptList() {
 			document.location.href = "${req.getContextPath()}/script/search?query=" + $("#searchText").val();
 		}

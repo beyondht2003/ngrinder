@@ -44,6 +44,9 @@ import org.apache.commons.io.IOUtils;
 import org.apache.commons.lang.ArrayUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.lang.mutable.MutableBoolean;
+import org.apache.commons.math3.stat.descriptive.moment.Mean;
+import org.apache.commons.math3.stat.descriptive.moment.StandardDeviation;
+import org.apache.commons.math3.stat.descriptive.rank.Percentile;
 import org.ngrinder.common.exception.NGrinderRuntimeException;
 import org.ngrinder.common.util.DateUtils;
 import org.ngrinder.common.util.ReflectionUtils;
@@ -61,6 +64,7 @@ import java.io.FileWriter;
 import java.text.DecimalFormat;
 import java.util.*;
 import java.util.Map.Entry;
+import java.util.concurrent.CopyOnWriteArrayList;
 
 import static org.ngrinder.common.util.CollectionUtils.*;
 import static org.ngrinder.common.util.ExceptionUtils.processException;
@@ -541,7 +545,7 @@ public class SingleConsole extends AbstractSingleConsole implements Listener, Sa
 
 	/*
      * (non-Javadoc)
-	 * 
+	 *
 	 * @see net.grinder.ISingleConsole2#getStatisticsIndexMap()
 	 */
 	public StatisticsIndexMap getStatisticsIndexMap() {
@@ -820,8 +824,12 @@ public class SingleConsole extends AbstractSingleConsole implements Listener, Sa
 	public static final Set<String> INTERESTING_STATISTICS = Sets.newHashSet("Tests", "Errors", "TPS",
 			"Response_bytes_per_second", "Mean_time_to_first_byte", "Peak_TPS", "Mean_Test_Time_(ms)", "User_defined");
 
+	// 添加成员变量：
+	private List<Double> responseTimeList = new CopyOnWriteArrayList<Double>();
+
 	/**
 	 * Build up statistics for current sampling.
+	 * 每次请求调用一次
 	 *
 	 * @param accumulatedStatistics intervalStatistics
 	 * @param intervalStatistics    accumulatedStatistics
@@ -862,6 +870,11 @@ public class SingleConsole extends AbstractSingleConsole implements Listener, Sa
 				totalStatistics.put(each.getKey(),
 						getRealDoubleValue(each.getValue().getDoubleValue(accumulatedStatistics)));
 			}
+			// 读取响应时间
+			if ("Mean_Test_Time_(ms)".equals(each.getKey())) {
+				responseTimeList.add((Double) getRealDoubleValue(each.getValue()
+					.getDoubleValue(intervalStatistics)));
+			}
 		}
 
 		result.put("totalStatistics", totalStatistics);
@@ -876,6 +889,46 @@ public class SingleConsole extends AbstractSingleConsole implements Listener, Sa
 		}
 		// Finally overwrite.. current one.
 		this.statisticData = result;
+	}
+
+	// 统计响应时间
+	private void getAdditionalStats() {
+
+		// 可能存在脚本错误导致读取数据失败的情况
+		try {
+			if (LOGGER.isDebugEnabled()) {
+				LOGGER.debug("getAdditionalStats() responseTimeList is {}", responseTimeList.toString());
+			}
+
+			// list to array
+			int i = 0;
+			double[] rtArray = new double[responseTimeList.size()];
+			for (double responseTime : responseTimeList) {
+				rtArray[i++] = responseTime;
+			}
+
+			Arrays.sort(rtArray);
+
+			Percentile percentile = new Percentile();
+			Map<String, Object> additionalStats = newHashMap();
+			additionalStats.put("minRT", rtArray[0]);
+			additionalStats.put("pct25RT", percentile.evaluate(rtArray, 25));
+			additionalStats.put("pct50RT", percentile.evaluate(rtArray, 50));
+			additionalStats.put("pct75RT", percentile.evaluate(rtArray, 75));
+			additionalStats.put("pct90RT", percentile.evaluate(rtArray, 90));
+			additionalStats.put("pct95RT", percentile.evaluate(rtArray, 95));
+			additionalStats.put("pct99RT", percentile.evaluate(rtArray, 99));
+			additionalStats.put("maxRT", rtArray[rtArray.length - 1]);
+
+			LOGGER.debug("SingleConsole getAdditionalStats additionalStats {}", additionalStats);
+
+			this.statisticData.put("additionalStats", additionalStats);
+
+		}catch (Exception ex){
+			System.out.println("getAdditionalStats:" + ex.toString());
+			LOGGER.error("getAdditionalStats:" + ex.toString());
+		}
+
 	}
 
 	/*
@@ -1196,6 +1249,9 @@ public class SingleConsole extends AbstractSingleConsole implements Listener, Sa
 		}
 		LOGGER.info("Sampling is stopped");
 		informTestSamplingEnd();
+
+		// 采样结束后，处理数据
+		getAdditionalStats();
 	}
 
 	private void informTestSamplingStart() {
