@@ -1,0 +1,237 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
+    <changeSet author="huangtao (generated)" id="1535907668663-1">
+        <createTable tableName="AGENT">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_3"/>
+            </column>
+            <column name="APPROVED" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="HOSTNAME" type="VARCHAR(255)"/>
+            <column name="IP" type="VARCHAR(255)"/>
+            <column name="REGION" type="VARCHAR(255)"/>
+            <column name="STATE" type="VARCHAR(20)"/>
+            <column defaultValueNumeric="0" name="PORT" type="INT"/>
+            <column name="SYSTEM_STAT" type="VARCHAR(1000)"/>
+            <column defaultValue="" name="VERSION" type="VARCHAR(256)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-2">
+        <createTable tableName="NUSER">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_4"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="AUTHENTICATION_PROVIDER_CLASS" type="VARCHAR(255)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
+            <column name="EMAIL" type="VARCHAR(255)"/>
+            <column defaultValue="T" name="ENABLED" type="CHAR(1)">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValue="F" name="IS_EXTERNAL" type="CHAR(1)"/>
+            <column name="MOBILE_PHONE" type="VARCHAR(255)"/>
+            <column name="PASSWORD" type="VARCHAR(255)"/>
+            <column name="ROLE_NAME" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="TIMEZONE" type="VARCHAR(255)"/>
+            <column name="USER_ID" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="USER_LANGUAGE" type="VARCHAR(255)"/>
+            <column name="USER_NAME" type="VARCHAR(255)"/>
+            <column name="CREATED_USER" type="BIGINT"/>
+            <column name="LAST_MODIFIED_USER" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-3">
+        <createTable tableName="PERF_TEST">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_C"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="AGENT_COUNT" type="INT"/>
+            <column name="DESCRIPTION" type="VARCHAR(2048)"/>
+            <column name="DISTRIBUTION_PATH" type="VARCHAR(255)"/>
+            <column name="DURATION" type="BIGINT"/>
+            <column name="ERRORS" type="BIGINT"/>
+            <column name="FINISH_TIME" type="TIMESTAMP"/>
+            <column name="IGNORE_SAMPLE_COUNT" type="INT"/>
+            <column name="RAMP_UP_INIT_COUNT" type="INT"/>
+            <column name="RAMP_UP_INIT_SLEEP_TIME" type="INT"/>
+            <column name="LAST_PROGRESS_MESSAGE" type="VARCHAR(2048)"/>
+            <column name="MEAN_TEST_TIME" type="DOUBLE(17)"/>
+            <column name="PEAK_TPS" type="DOUBLE(17)"/>
+            <column name="ERRORRATE" type="DOUBLE(17)"/>
+            <column name="MINRT" type="DOUBLE(17)"/>
+            <column name="PCT25RT" type="DOUBLE(17)"/>
+            <column name="PCT50RT" type="DOUBLE(17)"/>
+            <column name="PCT75RT" type="DOUBLE(17)"/>
+            <column name="PCT90RT" type="DOUBLE(17)"/>
+            <column name="PCT95RT" type="DOUBLE(17)"/>
+            <column name="PCT99RT" type="DOUBLE(17)"/>
+            <column name="MAXRT" type="DOUBLE(17)"/>
+            <column name="PORT" type="INT"/>
+            <column name="RAMP_UP_STEP" type="INT"/>
+            <column name="RAMP_UP_INCREMENT_INTERVAL" type="INT"/>
+            <column name="PROCESSES" type="INT"/>
+            <column name="PROGRESS_MESSAGE" type="VARCHAR(2048)"/>
+            <column name="RUN_COUNT" type="INT"/>
+            <column name="SCHEDULED_TIME" type="TIMESTAMP"/>
+            <column name="SCRIPT_NAME" type="VARCHAR(255)"/>
+            <column name="SCRIPT_REVISION" type="BIGINT"/>
+            <column defaultValue="F" name="SEND_MAIL" type="CHAR(1)"/>
+            <column name="START_TIME" type="TIMESTAMP"/>
+            <column name="STATUS" type="VARCHAR(255)"/>
+            <column defaultValue="F" name="STOP_REQUEST" type="CHAR(1)"/>
+            <column name="TAG_STRING" type="VARCHAR(255)"/>
+            <column name="TARGET_HOSTS" type="VARCHAR(255)"/>
+            <column name="TEST_COMMENT" type="VARCHAR(2048)"/>
+            <column name="TEST_ERROR_CAUSE" type="VARCHAR(255)"/>
+            <column name="NAME" type="VARCHAR(255)"/>
+            <column name="TEST_TIME_STANDARD_DEVIATION" type="DOUBLE(17)"/>
+            <column name="TESTS" type="BIGINT"/>
+            <column name="THREADS" type="INT"/>
+            <column name="THRESHOLD" type="VARCHAR(255)"/>
+            <column name="TPS" type="DOUBLE(17)"/>
+            <column name="USE_RAMPUP" type="CHAR(1)"/>
+            <column name="VUSER_PER_AGENT" type="INT"/>
+            <column name="CREATED_USER" type="BIGINT"/>
+            <column name="LAST_MODIFIED_USER" type="BIGINT"/>
+            <column name="REGION" type="VARCHAR(255)"/>
+            <column defaultValue="F" name="SAFE_DISTRIBUTION" type="CHAR(1)"/>
+            <column name="AGENT_STAT" type="VARCHAR(255)"/>
+            <column name="RUNNING_SAMPLE" type="VARCHAR(255)"/>
+            <column name="MONITOR_STAT" type="VARCHAR(255)"/>
+            <column name="SAMPLING_INTERVAL" type="INT"/>
+            <column defaultValue="" name="PARAM" type="VARCHAR(256)"/>
+            <column defaultValue="PROCESS" name="RAMP_UP_TYPE" type="VARCHAR(10)"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-4">
+        <createTable tableName="PERF_TEST_TAG">
+            <column name="PERF_TEST_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_8"/>
+            </column>
+            <column name="TAG_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_8"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-5">
+        <createTable tableName="SHARED_USER">
+            <column name="OWNER_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="PK_SHARED_USER"/>
+            </column>
+            <column name="FOLLOW_ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="PK_SHARED_USER"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-6">
+        <createTable tableName="SYSTEM_MONITOR">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_F"/>
+            </column>
+            <column name="COLLECT_TIME" type="BIGINT"/>
+            <column name="CPU_USED_PERCENTAGE" type="DOUBLE(17)"/>
+            <column name="FREE_MEMORY" type="BIGINT"/>
+            <column name="IP" type="VARCHAR(255)"/>
+            <column name="MONITOR_KEY" type="VARCHAR(255)"/>
+            <column name="MESSAGE" type="VARCHAR(255)"/>
+            <column name="PORT" type="INT">
+                <constraints nullable="false"/>
+            </column>
+            <column name="SYSTEM" type="VARCHAR(255)"/>
+            <column name="TOTAL_MEMORY" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-7">
+        <createTable tableName="TAG">
+            <column autoIncrement="true" name="ID" type="BIGINT">
+                <constraints primaryKey="true" primaryKeyName="CONSTRAINT_1"/>
+            </column>
+            <column name="CREATED_DATE" type="TIMESTAMP"/>
+            <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
+            <column name="TAGVALUE" type="VARCHAR(255)"/>
+            <column name="CREATED_USER" type="BIGINT"/>
+            <column name="LAST_MODIFIED_USER" type="BIGINT"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-8">
+        <addUniqueConstraint columnNames="ID" constraintName="CONSTRAINT_14" tableName="TAG"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-9">
+        <addUniqueConstraint columnNames="ID" constraintName="CONSTRAINT_3B" tableName="AGENT"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-10">
+        <addUniqueConstraint columnNames="ID" constraintName="CONSTRAINT_47" tableName="NUSER"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-11">
+        <addUniqueConstraint columnNames="USER_ID" constraintName="CONSTRAINT_473" tableName="NUSER"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-12">
+        <addUniqueConstraint columnNames="ID" constraintName="CONSTRAINT_C3" tableName="PERF_TEST"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-13">
+        <addUniqueConstraint columnNames="ID" constraintName="CONSTRAINT_F1" tableName="SYSTEM_MONITOR"/>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-14">
+        <createIndex indexName="COLLECT_TIME_INDEX" tableName="SYSTEM_MONITOR">
+            <column name="COLLECT_TIME"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-15">
+        <createIndex indexName="CREATED_USER_INDEX" tableName="NUSER">
+            <column name="CREATED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-16">
+        <createIndex indexName="CREATED_USER_INDEX_PERF_TEST" tableName="PERF_TEST">
+            <column name="CREATED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-17">
+        <createIndex indexName="CREATED_USER_INDEX_TAG" tableName="TAG">
+            <column name="CREATED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-18">
+        <createIndex indexName="IP_INDEX" tableName="SYSTEM_MONITOR">
+            <column name="IP"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-19">
+        <createIndex indexName="LAST_MODIFIED_USER_INDEX_NUSER" tableName="NUSER">
+            <column name="LAST_MODIFIED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-20">
+        <createIndex indexName="LAST_MODIFIED_USER_INDEX_PERF_TEST" tableName="PERF_TEST">
+            <column name="LAST_MODIFIED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-21">
+        <createIndex indexName="LAST_MODIFIED_USER_INDEX_TAG" tableName="TAG">
+            <column name="LAST_MODIFIED_USER"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-22">
+        <createIndex indexName="MONITOR_KEY_INDEX" tableName="SYSTEM_MONITOR">
+            <column name="MONITOR_KEY"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-23">
+        <createIndex indexName="PERF_TEST_STATUS_INDEX" tableName="PERF_TEST">
+            <column name="STATUS"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="huangtao (generated)" id="1535907668663-24">
+        <createIndex indexName="SCHEDULED_TIME_INDEX" tableName="PERF_TEST">
+            <column name="SCHEDULED_TIME"/>
+        </createIndex>
+    </changeSet>
+</databaseChangeLog>
