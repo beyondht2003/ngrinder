@@ -54,7 +54,7 @@
             <column name="CREATED_DATE" type="TIMESTAMP"/>
             <column name="LAST_MODIFIED_DATE" type="TIMESTAMP"/>
             <column name="AGENT_COUNT" type="INT"/>
-            <column name="DESCRIPTION" type="VARCHAR(2048)"/>
+            <column name="DESCRIPTION" type="VARCHAR(255)"/>
             <column name="DISTRIBUTION_PATH" type="VARCHAR(255)"/>
             <column name="DURATION" type="BIGINT"/>
             <column name="ERRORS" type="BIGINT"/>
@@ -62,7 +62,7 @@
             <column name="IGNORE_SAMPLE_COUNT" type="INT"/>
             <column name="RAMP_UP_INIT_COUNT" type="INT"/>
             <column name="RAMP_UP_INIT_SLEEP_TIME" type="INT"/>
-            <column name="LAST_PROGRESS_MESSAGE" type="VARCHAR(2048)"/>
+            <column name="LAST_PROGRESS_MESSAGE" type="VARCHAR(255)"/>
             <column name="MEAN_TEST_TIME" type="DOUBLE(17)"/>
             <column name="PEAK_TPS" type="DOUBLE(17)"/>
             <column name="ERRORRATE" type="DOUBLE(17)"/>
@@ -78,7 +78,7 @@
             <column name="RAMP_UP_STEP" type="INT"/>
             <column name="RAMP_UP_INCREMENT_INTERVAL" type="INT"/>
             <column name="PROCESSES" type="INT"/>
-            <column name="PROGRESS_MESSAGE" type="VARCHAR(2048)"/>
+            <column name="PROGRESS_MESSAGE" type="VARCHAR(1024)"/>
             <column name="RUN_COUNT" type="INT"/>
             <column name="SCHEDULED_TIME" type="TIMESTAMP"/>
             <column name="SCRIPT_NAME" type="VARCHAR(255)"/>
@@ -103,8 +103,8 @@
             <column name="LAST_MODIFIED_USER" type="BIGINT"/>
             <column name="REGION" type="VARCHAR(255)"/>
             <column defaultValue="F" name="SAFE_DISTRIBUTION" type="CHAR(1)"/>
-            <column name="AGENT_STAT" type="VARCHAR(255)"/>
-            <column name="RUNNING_SAMPLE" type="VARCHAR(255)"/>
+            <column name="AGENT_STAT" type="VARCHAR(1000)"/>
+            <column name="RUNNING_SAMPLE" type="VARCHAR(10000)"/>
             <column name="MONITOR_STAT" type="VARCHAR(255)"/>
             <column name="SAMPLING_INTERVAL" type="INT"/>
             <column defaultValue="" name="PARAM" type="VARCHAR(256)"/>
