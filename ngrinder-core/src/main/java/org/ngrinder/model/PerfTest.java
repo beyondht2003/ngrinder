@@ -373,7 +373,8 @@ public class PerfTest extends BaseModel<PerfTest> {
 		}
 		this.runCount = getSafe(this.runCount);
 		this.duration = getSafe(this.duration, 60000L);
-		this.samplingInterval = getSafe(this.samplingInterval, 2);
+		// 设置默认采样间隔
+		this.samplingInterval = getSafe(this.samplingInterval, 3);
 		this.scriptRevision = getSafe(this.scriptRevision, -1L);
 		this.param = getSafe(this.param, "");
 		this.region = getSafe(this.region, "NONE");
