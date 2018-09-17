@@ -68,6 +68,8 @@ public enum Database {
 			dataSource.setUrl(format);
 			dataSource.setUsername(databaseProperties.getProperty(DatabaseConfig.PROP_DATABASE_USERNAME));
 			dataSource.setPassword(databaseProperties.getProperty(DatabaseConfig.PROP_DATABASE_PASSWORD));
+			System.out.println("##dataSource:" + dataSource.getUrl()
+				+ ":" + dataSource.getUsername() + ":" + dataSource.getPassword());
 		}
 	},
 
@@ -82,6 +84,9 @@ public enum Database {
 				StringUtils.trimToEmpty(databaseProperties.getProperty(DatabaseConfig.PROP_DATABASE_URL_OPTION))));
 			dataSource.setUsername(databaseProperties.getProperty(DatabaseConfig.PROP_DATABASE_USERNAME));
 			dataSource.setPassword(databaseProperties.getProperty(DatabaseConfig.PROP_DATABASE_PASSWORD));
+
+			System.out.println("##dataSource:" + dataSource.getUrl()
+				+ ":" + dataSource.getUsername() + ":" + dataSource.getPassword());
 		}
 	};
 
