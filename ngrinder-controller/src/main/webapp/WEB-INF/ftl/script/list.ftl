@@ -70,6 +70,10 @@
 											<i class="icon-upload"></i>
 											<@spring.message "script.action.uploadResources"/>
 										</a>
+										<a class="btn btn-success" href="/user/switch?to=admin" data-toggle="modal">
+											<i class="icon-home"></i>
+											<@spring.message "script.action.switchToAdmin"/>
+										</a>
 									</#if>
 								</td>
 								<td>
