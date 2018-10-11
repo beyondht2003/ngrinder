@@ -213,8 +213,14 @@ public class PerfTestController extends BaseController {
 		Map<String, MutableInt> agentCountMap = agentManagerService.getAvailableAgentCountMap(user);
 		model.addAttribute(PARAM_REGION_AGENT_COUNT_MAP, agentCountMap);
 		model.addAttribute(PARAM_REGION_LIST, regionService.getAllVisibleRegionNames());
+		// 配置进程与线程数策略
 		model.addAttribute(PARAM_PROCESS_THREAD_POLICY_SCRIPT, perfTestService.getProcessAndThreadPolicyScript());
 		addDefaultAttributeOnModel(model);
+		//System.out.println("##PARAM_TEST:" + test);
+		//System.out.println("##agentCountMap:" + agentCountMap);
+		//System.out.println("##PARAM_REGION_LIST:" + regionService.getAllVisibleRegionNames());
+		//System.out.println("##PARAM_PROCESS_THREAD_POLICY_SCRIPT:" + perfTestService.getProcessAndThreadPolicyScript());
+		////System.out.println("##model:" + model);
 		return "perftest/detail";
 	}
 
@@ -574,9 +580,11 @@ public class PerfTestController extends BaseController {
 	public void showLog(User user, @PathVariable("id") long id, @RemainedPath String path, HttpServletResponse response) {
 		getOneWithPermissionCheck(user, id, false);
 		File targetFile = perfTestService.getLogFile(id, path);
+		System.out.println("##path:" + path);
 		response.reset();
 		response.setContentType("text/plain");
 		response.setCharacterEncoding("UTF-8");
+		System.out.println("##response:" + response);
 		FileInputStream fileInputStream = null;
 		try {
 			fileInputStream = new FileInputStream(targetFile);

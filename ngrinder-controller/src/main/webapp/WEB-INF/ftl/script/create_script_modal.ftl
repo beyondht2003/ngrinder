@@ -17,7 +17,7 @@
 					<#assign name_message>
 						<@spring.message "script.info.name.help"/>
 					</#assign>
-					
+
 					<select id="script_type" name="scriptType" class="span2">
 						<#list handlers as handler>
 							<option value="${handler.key}" extension="${handler.extension}" project_handler="${handler.isProjectHandler()?string}">${handler.title}</option>
@@ -69,7 +69,7 @@
 						<span class="help-inline well"><@spring.message "script.action.createResourceAndLib.help"/>
 						<a href="http://www.cubrid.org/wiki_ngrinder/entry/how-to-use-lib-and-resources" target="blank"><i class="icon-question-sign" style="margin-top:2px"></i></a>
 						</span>
-					</div> 
+					</div>
 				</div>
 			</fieldset>
 			<div class="text-center">
@@ -85,7 +85,7 @@
 			</div>
 		</form>
 	</div>
-	
+
 	<div class="modal-footer">
 		<button class="btn btn-primary" id="create_script_btn"><@spring.message "common.button.create"/></button>
 		<button class="btn" data-dismiss="modal"><@spring.message "common.button.cancel"/></button>
@@ -98,6 +98,7 @@
 		$("#test_url").val("");
 		$("#create_script_btn").on('click', function() {
 			var $name = $("#file_name");
+
 			if (checkEmptyByObj($name)) {
 				markInput($name, false, "<@spring.message "common.message.validate.format"/>");
 				return;
@@ -106,10 +107,10 @@
 					markInput($name, false, "<@spring.message "common.message.validate.format"/>");
 					return;
 				}
-				
+
 				markInput($name, true);
 			}
-			
+
 			var name = $name.val();
 			var $selectedElement = $("#script_type").find("option:selected");
 			var extension = $selectedElement.attr("extension").toLowerCase();
@@ -133,6 +134,8 @@
 				}
 			}
 			$("#options").val(options.toJson($("#method").val()));
+//			console.log($("#method").val())
+			console.log(options.toJson($("#method").val()))
 			document.forms.createForm.submit();
 		});
 		$("#detail_config_section_btn").click(function() {

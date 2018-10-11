@@ -104,8 +104,8 @@ public class FileEntryController extends BaseController {
 		model.addAttribute("currentPath", path);
 		model.addAttribute("svnUrl", getSvnUrlBreadcrumbs(user, path));
 		model.addAttribute("handlers", handlerFactory.getVisibleHandlers());
-		System.out.println("model:" + model);
-		System.out.println("currentPath:" + path);
+		//System.out.println("model:" + model);
+		//System.out.println("currentPath:" + path);
 		return "script/list";
 	}
 

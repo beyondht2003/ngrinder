@@ -37,7 +37,7 @@
 							append_prefix="perfTest.config.max" append='<span id="maxAgentCount"></span>' />
 					</@control_group>
 				</div>
-	
+
 				<div class="span2">
 					<#if clustered == true>
 						<@control_group name="region" label_message_key="perfTest.config.region"
@@ -58,7 +58,7 @@
 				</div>
 			</div>
 
-			<@control_group name="vuserPerAgent" label_message_key="perfTest.config.vuserPerAgent" 
+			<@control_group name="vuserPerAgent" label_message_key="perfTest.config.vuserPerAgent"
 				data_step="5" data_intro="intro.config.basic.vuser">
 				<@input_append name="vuserPerAgent"
 					value="${(test.vuserPerAgent)!1}"
@@ -72,7 +72,7 @@
 						<span id="total_vuser"></span>
 					</span>
 				</div>
-				<div id="process_thread_config_panel" style="display: none;margin-top:5px">
+				<div id="process_thread_config_panel" style="display: block;margin-top:5px">
 					<@input_prepend name="processes" value="${test.processes}" message="perfTest.config.process"
 						extra_css="control-group" />
 					<@input_prepend name="threads" value="${test.threads}" message="perfTest.config.thread"
